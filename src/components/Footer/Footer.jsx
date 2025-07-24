@@ -10,7 +10,7 @@ function Footer() {
           <ul>
             <li>
               <i className="fas fa-envelope"></i>
-              <a href="mailto:contacto@desarrollosnerd.dev">contacto@desarrollosnerd.dev</a>
+              <a href="mailto:rdemetrio72@yahoo.com">contacto@desarrollosnerd.dev</a>
             </li>
             <li>
               <i className="fas fa-phone"></i>
@@ -18,7 +18,7 @@ function Footer() {
             </li>
             <li>
               <i className="fab fa-whatsapp"></i>
-              <a href="https://wa.me/18094059011" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              <a href="https://wa.me/18094059011?text=¡Hola! Me interesa conocer más sobre sus servicios de desarrollo." target="_blank" rel="noopener noreferrer">WhatsApp</a>
             </li>
             <li>
               <i className="fas fa-map-marker-alt"></i>
@@ -54,14 +54,8 @@ function Footer() {
         <div className="footer-section">
           <h3>Redes Sociales</h3>
           <div className="social-links">
-            <a href="https://github.com/desarrollosnerd" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/DemetrioReyes" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-github"></i>
-            </a>
-            <a href="https://linkedin.com/in/desarrollosnerd" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-linkedin"></i>
-            </a>
-            <a href="https://twitter.com/desarrollosnerd" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-twitter"></i>
             </a>
             <a href="https://instagram.com/desarrollosnerd" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-instagram"></i>

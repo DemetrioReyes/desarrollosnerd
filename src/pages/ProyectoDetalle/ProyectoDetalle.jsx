@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
-import './ProyectoDetalle.css';
-
-// Importar logo
 import logo from '/logo3.png';
+import './ProyectoDetalle.css';
 
 function ProyectoDetalle() {
   const { id } = useParams();
-  console.log('ID recibido:', id); // Para debug
 
-  const proyectos = {
+  // Memoizamos el objeto de proyectos para evitar recreaciones
+  const proyectos = useMemo(() => ({
     'app-movil-para-la-mejora-de-la-colaboracion-social': {
       title: 'App móvil para la mejora de la colaboración social',
       industry: 'Desarrollo Móvil / Impacto Social',
@@ -142,65 +142,79 @@ function ProyectoDetalle() {
       conclusions: 'La plataforma revolucionó la gestión de fincas.',
       tags: ['JAVA', 'SPRING BOOT', 'PLATAFORMA']
     }
-  };
+  }), []);
 
-  const proyecto = proyectos[id];
+  // Memoizamos el proyecto actual
+  const proyecto = useMemo(() => proyectos[id], [id, proyectos]);
+
+  // Componente para secciones del proyecto
+  const ProjectSection = React.memo(({ title, content }) => (
+    <div className="proyecto-section">
+      <h3>{title}</h3>
+      <p>{content}</p>
+    </div>
+  ));
+
+  if (!proyecto) {
+    return (
+      <div className="proyecto-detalle">
+        <Navbar />
+        <main className="proyecto-content">
+          <div className="proyecto-header">
+            <h1>Proyecto no encontrado</h1>
+            <p className="industry">El proyecto que buscas no existe</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="proyecto-detalle">
       <Navbar />
-      
       <main className="proyecto-content">
         <div className="proyecto-header">
-          <h1>{proyecto ? proyecto.title : 'Proyecto no encontrado'}</h1>
-          <p className="industry">{proyecto ? proyecto.industry : 'N/A'}</p>
+          <h1>{proyecto.title}</h1>
+          <p className="industry">{proyecto.industry}</p>
         </div>
 
-        {proyecto && (
-          <div className="proyecto-body">
-            <div className="proyecto-image">
-              <h2 className="proyecto-title">{proyecto.title}</h2>
-              <img src={logo} alt="Logo" className="proyecto-logo" />
-            </div>
+        <div className="proyecto-body">
+          <div className="proyecto-image">
+            <h2 className="proyecto-title">{proyecto.title}</h2>
+            <LazyLoadImage
+              src={logo}
+              alt="Logo"
+              className="proyecto-logo"
+              effect="blur"
+              threshold={100}
+            />
+          </div>
 
-            <section className="proyecto-section">
-              <h2>Desafío</h2>
-              <p>{proyecto.challenge}</p>
-            </section>
-
-            <section className="proyecto-section">
-              <h2>Solución Implementada</h2>
-              
-              <h3>Descripción General</h3>
-              <p>{proyecto.solution.general}</p>
-
-              <h3>Tecnologías Utilizadas</h3>
-              <p>{proyecto.solution.technologies}</p>
-
-              <h3>Características Destacadas</h3>
-              <p>{proyecto.solution.features}</p>
-
-              <h3>Resultados</h3>
-              <p>{proyecto.solution.results}</p>
-            </section>
-
-            <section className="proyecto-section">
-              <h2>Conclusiones</h2>
-              <p>{proyecto.conclusions}</p>
-            </section>
-
-            <div className="proyecto-tags">
-              {proyecto.tags.map(tag => (
-                <span key={tag} className="tag">{tag}</span>
-              ))}
+          <ProjectSection title="Desafío" content={proyecto.challenge} />
+          
+          <div className="proyecto-section">
+            <h3>Solución Implementada</h3>
+            <div className="solution-details">
+              <ProjectSection title="Descripción General" content={proyecto.solution.general} />
+              <ProjectSection title="Tecnologías Utilizadas" content={proyecto.solution.technologies} />
+              <ProjectSection title="Características Destacadas" content={proyecto.solution.features} />
+              <ProjectSection title="Resultados" content={proyecto.solution.results} />
             </div>
           </div>
-        )}
-      </main>
 
+          <ProjectSection title="Conclusiones" content={proyecto.conclusions} />
+
+          <div className="proyecto-tags">
+            {proyecto.tags.map((tag, index) => (
+              <span key={index} className="tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </main>
       <Footer />
     </div>
   );
 }
 
-export default ProyectoDetalle; 
+export default React.memo(ProyectoDetalle); 

@@ -88,7 +88,7 @@ function Contacto() {
               <h3>Información de Contacto</h3>
               <div className="info-item">
                 <i className="fas fa-envelope"></i>
-                <a href="mailto:rdemetrio72@yahoo.com">rdemetrio72@yahoo.com</a>
+                <a href="mailto:rdemetrio72@yahoo.com">contacto@desarrollosnerd.dev</a>
               </div>
               <div className="info-item">
                 <i className="fas fa-phone"></i>
@@ -96,7 +96,7 @@ function Contacto() {
               </div>
               <div className="info-item">
                 <i className="fab fa-whatsapp"></i>
-                <a href="https://wa.me/18094059011" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <a href="https://wa.me/18094059011?text=¡Hola! Me interesa conocer más sobre sus servicios de desarrollo." target="_blank" rel="noopener noreferrer">WhatsApp</a>
               </div>
               <div className="info-item">
                 <i className="fas fa-map-marker-alt"></i>
@@ -107,7 +107,7 @@ function Contacto() {
             <div className="social-section">
               <h3>Síguenos</h3>
               <div className="social-links">
-                <a href="https://github.com/desarrollosnerd" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/DemetrioReyes" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-github"></i>
                 </a>
                 <a href="https://instagram.com/desarrollosnerd" target="_blank" rel="noopener noreferrer">

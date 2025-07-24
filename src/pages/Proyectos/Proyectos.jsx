@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
-import './Proyectos.css';
-import { Link } from 'react-router-dom';
-
-// Importar logo
 import logo from '/logo3.png';
+import './Proyectos.css';
 
 function Proyectos() {
   const [selectedTag, setSelectedTag] = useState('');
 
-  const tags = [
-    'APLICACIONES', 'BASE DE DATOS', 'JAVA', 'JAVASCRIPT', 'METODOLOGÍAS',
-    'MICROSERVICIOS', 'PLATAFORMA', 'POSTGRESQL', 'REACT', 'SPRING BOOT'
-  ];
+  // Memoizamos los tags para evitar recálculos innecesarios
+  const tags = useMemo(() => [
+    'APLICACIONES',
+    'SPRING BOOT',
+    'POSTGRESQL',
+    'PLATAFORMA',
+    'E-COMMERCE',
+    'DESARROLLO WEB',
+    'MÓVIL'
+  ], []);
 
-  const projects = [
+  // Memoizamos los proyectos para evitar recreaciones innecesarias
+  const projects = useMemo(() => [
     {
       title: 'App móvil para la mejora de la colaboración social',
       description: 'Desarrollo de app móvil y backoffice con Vue y Apache Cordova, integrados con un API en Spring Boot y PostgreSQL con PostGIS',
@@ -66,33 +73,45 @@ function Proyectos() {
       description: 'Software de gestión de fincas con Spring MVC evolucionando a REST y AngularJS, garantizando simplicidad y eficiencia',
       tags: ['JAVA', 'SPRING BOOT', 'PLATAFORMA']
     }
-  ];
+  ], []);
 
-  const filteredProjects = selectedTag 
-    ? projects.filter(project => project.tags.includes(selectedTag))
-    : projects;
+  // Memoizamos el filtrado de proyectos
+  const filteredProjects = useMemo(() => 
+    selectedTag
+      ? projects.filter(project => project.tags.includes(selectedTag))
+      : projects,
+    [selectedTag, projects]
+  );
+
+  // Función para generar URLs seguros
+  const generateSafeUrl = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  };
 
   return (
     <div className="proyectos-page">
       <Navbar />
-      
       <header className="proyectos-header">
         <h1>Nuestros Proyectos</h1>
         <p>Soluciones tecnológicas que han transformado negocios</p>
       </header>
-
+      
       <main className="proyectos-content">
         <div className="tags-filter">
-          <button 
-            className={!selectedTag ? 'tag-btn active' : 'tag-btn'}
+          <button
+            className={`tag ${selectedTag === '' ? 'active' : ''}`}
             onClick={() => setSelectedTag('')}
           >
-            TODOS
+            Todos
           </button>
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <button
               key={tag}
-              className={selectedTag === tag ? 'tag-btn active' : 'tag-btn'}
+              className={`tag ${selectedTag === tag ? 'active' : ''}`}
               onClick={() => setSelectedTag(tag)}
             >
               {tag}
@@ -101,53 +120,42 @@ function Proyectos() {
         </div>
 
         <div className="projects-grid">
-          {filteredProjects.map((project, index) => (
-            <Link 
-              to={`/proyectos/${project.title
-                .toLowerCase()
-                .replace(/ /g, '-')
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')}`}
-              className="project-card" 
-              key={index}
-              onClick={(e) => {
-                const url = project.title
-                  .toLowerCase()
-                  .replace(/ /g, '-')
-                  .normalize('NFD')
-                  .replace(/[\u0300-\u036f]/g, '');
-                console.log('URL generada:', url); // Para debug
-              }}
-            >
-              <div className="project-image">
-                <h2 className="project-title">{project.title}</h2>
-                <img src={logo} alt="Logo" className="project-logo" />
-              </div>
-              <div className="project-info">
-                <p>{project.description}</p>
-                <div className="project-tags">
-                  {project.tags.map(tag => (
-                    <span 
-                      key={tag} 
-                      className="tag"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedTag(tag);
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+          {filteredProjects.map((project, index) => {
+            const url = generateSafeUrl(project.title);
+            return (
+              <Link
+                to={`/proyectos/${url}`}
+                className="project-card"
+                key={index}
+              >
+                <div className="project-image">
+                  <h2 className="project-title">{project.title}</h2>
+                  <LazyLoadImage
+                    src={logo}
+                    alt="Logo"
+                    className="project-logo"
+                    effect="blur"
+                    threshold={100}
+                  />
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="project-info">
+                  <p>{project.description}</p>
+                  <div className="project-tags">
+                    {project.tags.map((tag, tagIndex) => (
+                      <span key={tagIndex} className="tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </main>
-
       <Footer />
     </div>
   );
 }
 
-export default Proyectos; 
+export default React.memo(Proyectos); 
