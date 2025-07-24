@@ -12,6 +12,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "react": "^19.1.0",
+    "react-chatbot-kit": "^2.2.2",
     "react-dom": "^19.1.0",
     "react-lazy-load-image-component": "^1.6.3",
     "react-router-dom": "^7.7.0"
