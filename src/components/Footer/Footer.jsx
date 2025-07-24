@@ -18,7 +18,7 @@ function Footer() {
             </li>
             <li>
               <i className="fab fa-whatsapp"></i>
-              <a href="https://wa.me/18094059011?text=¡Hola! Me interesa conocer más sobre sus servicios de desarrollo." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              <a href="https://wa.me/18094059011?text=¡Hola! Estoy interesado en conocer más sobre sus servicios de desarrollo." target="_blank" rel="noopener noreferrer">WhatsApp</a>
             </li>
             <li>
               <i className="fas fa-map-marker-alt"></i>
