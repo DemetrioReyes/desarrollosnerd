@@ -1,0 +1,20 @@
+/* src/styles/colors.css */
+
+:root {
+    /* Azules Tecnológicos */
+    --color-primary: #007bff;   /* Azul principal, para botones, acentos */
+    --color-primary-dark: #0056b3; /* Azul más oscuro para hover/active */
+    --color-secondary: #6c757d;  /* Gris secundario, para texto menos prominente */
+  
+    /* Verdes Brillantes / Neón */
+    --color-accent-green: #28a745; /* Verde brillante para elementos destacados */
+    --color-accent-green-dark: #218838; /* Verde más oscuro para hover/active */
+  
+    /* Grises Neutros */
+    --color-background-light: #f8f9fa; /* Fondo claro */
+    --color-text-dark: #343a40;      /* Texto oscuro */
+    --color-border: #dee2e6;        /* Bordes sutiles */
+  
+    /* Acento geek/futurista */
+    --color-geek-accent: #00bcd4; /* Un cian brillante para toques especiales, como brillos de código */
+  }

@@ -1,0 +1,10 @@
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenido principal crecerá para ocupar el espacio disponible */
+.home-page > *:not(nav):not(footer) {
+  flex: 1;
+} 

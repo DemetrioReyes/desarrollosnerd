@@ -1,0 +1,207 @@
+.proyecto-detalle {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.proyecto-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.proyecto-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.proyecto-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.industry {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+}
+
+.proyecto-body {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  padding: 0 0 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.proyecto-image {
+  position: relative;
+  background: white;
+  padding: 3rem;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 2rem;
+}
+
+.proyecto-title {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.proyecto-logo {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: brightness(0.9);
+}
+
+.proyecto-section {
+  padding: 0 2rem;
+  margin-bottom: 3rem;
+}
+
+.proyecto-section:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.proyecto-section h2 {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.proyecto-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-primary, #007bff);
+  border-radius: 3px;
+}
+
+.proyecto-section h3 {
+  color: #444;
+  font-size: 1.4rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.proyecto-section p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.proyecto-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 2rem;
+}
+
+.tag {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .proyecto-content {
+    padding: 1rem;
+  }
+
+  .proyecto-header {
+    padding: 1.5rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .proyecto-header h1 {
+    font-size: 2rem;
+  }
+
+  .proyecto-body {
+    padding: 0 0 1.5rem 0;
+  }
+
+  .proyecto-image {
+    padding: 2rem;
+    min-height: 150px;
+  }
+
+  .proyecto-title {
+    font-size: 1.6rem;
+  }
+
+  .proyecto-logo {
+    width: 45px;
+    height: 45px;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .proyecto-section {
+    padding: 0 1.5rem;
+  }
+
+  .proyecto-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .proyecto-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .proyecto-tags {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .proyecto-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .industry {
+    font-size: 1rem;
+  }
+
+  .proyecto-image {
+    padding: 1.5rem;
+    min-height: 120px;
+  }
+
+  .proyecto-title {
+    font-size: 1.4rem;
+  }
+
+  .proyecto-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+} 

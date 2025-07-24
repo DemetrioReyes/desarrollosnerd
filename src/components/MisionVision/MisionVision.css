@@ -1,0 +1,125 @@
+.mision-vision-section {
+  padding: 5rem 2rem;
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+.mision-vision-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-top: 2rem;
+}
+
+/* Elemento decorativo del título */
+.section-title::before {
+  content: '{ ... }';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: monospace;
+  font-size: 2rem;
+  color: var(--color-primary);
+  opacity: 0.8;
+  letter-spacing: 0.5rem;
+}
+
+/* Quitamos la línea que teníamos antes */
+.section-title::after {
+  display: none;
+}
+
+.mvv-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.mvv-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mvv-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  border-radius: 50%;
+  color: white;
+}
+
+.card-icon i {
+  font-size: 2rem;
+}
+
+.mvv-card h3 {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.mvv-card p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.mvv-card ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.mvv-card ul li {
+  color: #666;
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.mvv-card ul li::before {
+  content: '→';
+  color: var(--color-primary);
+  position: absolute;
+  left: 0;
+}
+
+@media (max-width: 768px) {
+  .mision-vision-section {
+    padding: 3rem 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .mvv-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .mvv-card {
+    padding: 1.5rem;
+  }
+} 
