@@ -6,7 +6,7 @@ const HeroSection = () => {
   return (
     <section className="hero-section">
       <div className="hero-content">
-        <h1>Transformamos tus ideas en soluciones digitales brillantes.</h1>
+        <h1>Innovación y tecnología al servicio de tu éxito.</h1>
         <p>Tu visión, nuestro código.</p>
         <div className="hero-cta-buttons">
           <button className="btn btn-primary" onClick={() => window.location.href='/servicios'}>Explora Nuestros Servicios</button>
