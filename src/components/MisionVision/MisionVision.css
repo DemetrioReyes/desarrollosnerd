@@ -106,6 +106,7 @@
   left: 0;
 }
 
+/* Estilos para móviles */
 @media (max-width: 768px) {
   .mision-vision-section {
     padding: 3rem 1rem;
@@ -121,5 +122,22 @@
 
   .mvv-card {
     padding: 1.5rem;
+  }
+
+  .section-title::before {
+    content: '{ }';
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
+    top: -15px;
+  }
+}
+
+/* Estilos para móviles pequeños */
+@media (max-width: 375px) {
+  .section-title::before {
+    content: '•';
+    font-size: 1.5rem;
+    letter-spacing: normal;
+    top: -20px;
   }
 } 
