@@ -1,11 +1,13 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import SEO from '../../components/SEO/SEO';
 import './Legal.css';
 
 function Terminos() {
   return (
     <div className="legal-page">
+      <SEO title="Términos y Condiciones" description="Términos y condiciones de contratación de Desarrollos Nerd. Pagos, propiedad intelectual, garantías y jurisdicción dominicana." path="/terminos" />
       <Navbar />
       <main className="legal-content">
         <header className="legal-header">

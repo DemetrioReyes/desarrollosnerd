@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { LanguageProvider } from './contexts/LanguageContext';
 import Home from './pages/Home/Home';
 import Servicios from './pages/Servicios/Servicios';
@@ -11,6 +12,7 @@ import './App.css';
 
 function App() {
   return (
+    <HelmetProvider>
     <LanguageProvider>
     <Router>
       <div className="app-container">
@@ -25,6 +27,7 @@ function App() {
       </div>
     </Router>
     </LanguageProvider>
+    </HelmetProvider>
   );
 }
 

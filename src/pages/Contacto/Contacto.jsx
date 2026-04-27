@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import Modal from '../../components/Modal/Modal';
 import { useLang } from '../../contexts/LanguageContext';
+import SEO from '../../components/SEO/SEO';
 import './Contacto.css';
 
 function Contacto() {
@@ -40,6 +41,13 @@ function Contacto() {
     <div className="contacto-page">
       <Navbar />
 
+      <SEO
+        title={c.title}
+        description={lang === 'es'
+          ? 'Contáctanos para tu proyecto de software, automatización o ciberseguridad. Primera consulta gratuita. WhatsApp: +1 (809) 405-9011.'
+          : 'Contact us for your software, automation or cybersecurity project. Free first consultation. WhatsApp: +1 (809) 405-9011.'}
+        path="/contacto"
+      />
       <header className="page-header">
         <div className="page-header-orb" aria-hidden="true"></div>
         <span className="page-eyebrow">{c.eyebrow}</span>

@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import { useLang } from '../../contexts/LanguageContext';
+import SEO from '../../components/SEO/SEO';
 import './Servicios.css';
 
 function Servicios() {
@@ -28,6 +29,13 @@ function Servicios() {
     <div className="servicios-page">
       <Navbar />
 
+      <SEO
+        title={lang === 'es' ? 'Servicios de Desarrollo de Software, IA y Ciberseguridad' : 'Software Development, AI & Cybersecurity Services'}
+        description={lang === 'es'
+          ? 'Software a medida, automatización con IA, apps móviles, e-commerce, pentesting y ciberseguridad. Soluciones tecnológicas para empresas en RD y el mundo.'
+          : 'Custom software, AI automation, mobile apps, e-commerce, pentesting and cybersecurity. Tech solutions for businesses in the Dominican Republic and worldwide.'}
+        path="/servicios"
+      />
       <header className="page-header">
         <div className="page-header-orb" aria-hidden="true"></div>
         <span className="page-eyebrow">{s.eyebrow}</span>

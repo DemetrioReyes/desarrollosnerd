@@ -1,11 +1,13 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import SEO from '../../components/SEO/SEO';
 import './Legal.css';
 
 function Privacidad() {
   return (
     <div className="legal-page">
+      <SEO title="Política de Privacidad" description="Política de privacidad de Desarrollos Nerd. Información sobre el tratamiento de datos personales, derechos del usuario y seguridad." path="/privacidad" />
       <Navbar />
       <main className="legal-content">
         <header className="legal-header">
