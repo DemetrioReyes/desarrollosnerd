@@ -3,32 +3,36 @@ import Chatbot from 'react-chatbot-kit';
 import 'react-chatbot-kit/build/main.css';
 import './Chatbot.css';
 
-import config from './config.jsx';
+import { createConfig } from './config.jsx';
+import { setLang } from './chatbotLang';
 import MessageParser from './MessageParser.jsx';
 import ActionProvider from './ActionProvider.jsx';
 import ChatbotButton from '../ChatbotButton/ChatbotButton';
+import { useLang } from '../../contexts/LanguageContext';
 
 const ChatbotComponent = () => {
   const [showBot, setShowBot] = useState(false);
+  const { lang } = useLang();
 
-  const toggleBot = () => {
-    setShowBot(!showBot);
-  };
+  // Keep module lang in sync
+  setLang(lang);
 
   return (
     <div className="chatbot-wrapper">
       {showBot && (
         <div className="chatbot-container">
+          {/* key={lang} remounts the chatbot when language changes, resetting messages */}
           <Chatbot
-            config={config}
+            key={lang}
+            config={createConfig(lang)}
             messageParser={MessageParser}
             actionProvider={ActionProvider}
           />
         </div>
       )}
-      <ChatbotButton onClick={toggleBot} isOpen={showBot} />
+      <ChatbotButton onClick={() => setShowBot(v => !v)} isOpen={showBot} />
     </div>
   );
 };
 
-export default ChatbotComponent; 
+export default ChatbotComponent;

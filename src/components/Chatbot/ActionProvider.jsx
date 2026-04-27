@@ -1,4 +1,5 @@
 import emailjs from '@emailjs/browser';
+import { getLang } from './chatbotLang';
 
 class ActionProvider {
   constructor(createChatBotMessage, setStateFunc) {
@@ -6,303 +7,251 @@ class ActionProvider {
     this.setState = setStateFunc;
   }
 
+  get isEn() { return getLang() === 'en'; }
+
+  t(es, en) { return this.isEn ? en : es; }
+
   handleHello = () => {
-    const message = this.createChatBotMessage(
-      '¡Hola! Soy el asistente virtual de Desarrollos Nerd. ¿Cómo puedo ayudarte hoy?',
-      {
-        widget: 'mainOptions',
-      }
+    const msg = this.createChatBotMessage(
+      this.t('¡Hola! Soy el asistente de Desarrollos Nerd. ¿Cómo puedo ayudarte?', "Hi! I'm Desarrollos Nerd's assistant. How can I help?"),
+      { widget: 'mainOptions' }
     );
-    this.updateChatbotState(message);
+    this.updateChatbotState(msg);
   };
 
   handleServices = () => {
-    const messages = [
-      this.createChatBotMessage('Estos son nuestros servicios principales:', {
-        delay: 500,
-        widget: 'serviceOptions',
-      })
-    ];
-    messages.forEach(this.updateChatbotState);
+    const msg = this.createChatBotMessage(
+      this.t('Estos son nuestros servicios principales:', 'Here are our main services:'),
+      { delay: 500, widget: 'serviceOptions' }
+    );
+    this.updateChatbotState(msg);
   };
 
   handleServiceDetail = (service) => {
-    const serviceDetails = {
+    const details = {
       web: {
-        title: '💻 Desarrollo Web',
-        description: 'Creamos sitios web modernos y responsivos:',
-        features: [
+        title: this.t('💻 Desarrollo Web', '💻 Web Development'),
+        desc: this.t('Creamos aplicaciones web modernas y responsivas:', 'We build modern, responsive web applications:'),
+        items: this.t([
           '• Landing pages profesionales',
           '• Aplicaciones web complejas',
           '• Portales empresariales',
           '• Integraciones con APIs',
-          '• SEO optimizado'
-        ]
+          '• SEO optimizado',
+        ], [
+          '• Professional landing pages',
+          '• Complex web applications',
+          '• Business portals',
+          '• API integrations',
+          '• SEO optimized',
+        ]),
       },
       mobile: {
-        title: '📱 Aplicaciones Móviles',
-        description: 'Desarrollamos apps nativas y multiplataforma:',
-        features: [
+        title: this.t('📱 Apps Móviles', '📱 Mobile Apps'),
+        desc: this.t('Desarrollamos apps nativas y multiplataforma:', 'We develop native and cross-platform apps:'),
+        items: this.t([
           '• Apps iOS y Android',
-          '• React Native',
+          '• React Native / Flutter',
           '• Notificaciones push',
           '• Integración con backend',
-          '• Diseño UX/UI personalizado'
-        ]
+          '• Diseño UX/UI personalizado',
+        ], [
+          '• iOS and Android apps',
+          '• React Native / Flutter',
+          '• Push notifications',
+          '• Backend integration',
+          '• Custom UX/UI design',
+        ]),
       },
       custom: {
-        title: '🔧 Software a Medida',
-        description: 'Soluciones personalizadas para tu negocio:',
-        features: [
+        title: this.t('🔧 Software a Medida', '🔧 Custom Software'),
+        desc: this.t('Soluciones personalizadas para tu negocio:', 'Custom solutions tailored to your business:'),
+        items: this.t([
           '• Automatización de procesos',
-          '• Sistemas de gestión',
-          '• Integraciones con sistemas existentes',
+          '• Sistemas de gestión (ERP/CRM)',
+          '• Integración con sistemas existentes',
           '• Migración de datos',
-          '• Mantenimiento continuo'
-        ]
+          '• Mantenimiento continuo',
+        ], [
+          '• Process automation',
+          '• Management systems (ERP/CRM)',
+          '• Legacy system integration',
+          '• Data migration',
+          '• Ongoing maintenance',
+        ]),
       },
       ecommerce: {
-        title: '🛒 E-commerce',
-        description: 'Plataformas de comercio electrónico:',
-        features: [
+        title: this.t('🛒 E-commerce', '🛒 E-commerce'),
+        desc: this.t('Plataformas de comercio electrónico:', 'Full e-commerce platforms:'),
+        items: this.t([
           '• Tiendas online completas',
-          '• Integración con pasarelas de pago',
+          '• Pasarelas de pago',
           '• Gestión de inventario',
           '• Panel administrativo',
-          '• Análisis de ventas'
-        ]
+          '• Análisis de ventas',
+        ], [
+          '• Full online stores',
+          '• Payment gateways',
+          '• Inventory management',
+          '• Admin dashboard',
+          '• Sales analytics',
+        ]),
+      },
+      automation: {
+        title: this.t('🤖 IA & Automatización', '🤖 AI & Automation'),
+        desc: this.t('Soluciones inteligentes para tu empresa:', 'Smart solutions for your business:'),
+        items: this.t([
+          '• Chatbots con IA (OpenAI, Claude)',
+          '• Automatización RPA',
+          '• Digitalización de procesos',
+          '• Business Intelligence',
+          '• Web scraping y datos',
+        ], [
+          '• AI chatbots (OpenAI, Claude)',
+          '• RPA automation',
+          '• Process digitalization',
+          '• Business Intelligence',
+          '• Web scraping & data',
+        ]),
+      },
+      security: {
+        title: this.t('🛡️ Ciberseguridad', '🛡️ Cybersecurity'),
+        desc: this.t('Protección integral para tu empresa:', 'Comprehensive security for your business:'),
+        items: this.t([
+          '• Pentesting y ethical hacking',
+          '• Auditorías de seguridad',
+          '• Hardening de servidores',
+          '• DevSecOps',
+          '• Cumplimiento ISO 27001 / GDPR',
+        ], [
+          '• Pentesting & ethical hacking',
+          '• Security audits',
+          '• Server hardening',
+          '• DevSecOps',
+          '• ISO 27001 / GDPR compliance',
+        ]),
       },
       consulting: {
-        title: '📊 Consultoría',
-        description: 'Asesoramiento tecnológico integral:',
-        features: [
+        title: this.t('📊 Consultoría', '📊 Consulting'),
+        desc: this.t('Asesoramiento tecnológico estratégico:', 'Strategic technology advisory:'),
+        items: this.t([
           '• Análisis de requerimientos',
           '• Arquitectura de sistemas',
           '• Optimización de procesos',
           '• Auditorías técnicas',
-          '• Planificación estratégica'
-        ]
+          '• Planificación estratégica',
+        ], [
+          '• Requirements analysis',
+          '• System architecture',
+          '• Process optimization',
+          '• Technical audits',
+          '• Strategic planning',
+        ]),
       },
-      scraping: {
-        title: '🕷️ Web Scraping',
-        description: 'Extracción y análisis de datos web:',
-        features: [
-          '• Extracción automatizada de datos',
-          '• Monitoreo de precios y productos',
-          '• Análisis de competencia',
-          '• Recopilación de información de mercado',
-          '• Actualización automática de datos',
-          '• APIs personalizadas',
-          '• Dashboards de visualización'
-        ]
-      },
-      security: {
-        title: '🛡️ Ciberseguridad',
-        description: 'Protección y seguridad informática integral:',
-        features: [
-          '• Auditorías de seguridad',
-          '• Pentesting (Pruebas de penetración)',
-          '• Análisis de vulnerabilidades',
-          '• Seguridad en aplicaciones web',
-          '• Protección contra malware y ransomware',
-          '• Configuración de firewalls',
-          '• Monitoreo de seguridad 24/7',
-          '• Respuesta a incidentes',
-          '• Formación en seguridad',
-          '• Cumplimiento normativo (GDPR, HIPAA, etc.)'
-        ]
-      }
     };
 
-    const detail = serviceDetails[service];
-    const messages = [
-      this.createChatBotMessage(detail.title, { delay: 500 }),
-      this.createChatBotMessage(detail.description, { delay: 1000 }),
-      this.createChatBotMessage(detail.features.join('\n'), { delay: 1500 }),
-      this.createChatBotMessage('¿Te gustaría conocer nuestros precios o agendar una llamada?', {
-        delay: 2000,
-        widget: 'nextStepOptions',
-      }),
-    ];
-    messages.forEach(this.updateChatbotState);
-  };
-
-  handlePricing = () => {
-    const messages = [
+    const d = details[service];
+    const msgs = [
+      this.createChatBotMessage(d.title, { delay: 500 }),
+      this.createChatBotMessage(d.desc, { delay: 1000 }),
+      this.createChatBotMessage(d.items.join('\n'), { delay: 1500 }),
       this.createChatBotMessage(
-        '💡 Cada proyecto es único y se adapta a tus necesidades específicas.',
-        { delay: 500 }
-      ),
-      this.createChatBotMessage(
-        'Para brindarte un presupuesto preciso, necesitamos conocer:\n' +
-        '• Alcance del proyecto\n' +
-        '• Funcionalidades requeridas\n' +
-        '• Plazos de entrega\n' +
-        '• Requerimientos específicos',
-        { delay: 1000 }
-      ),
-      this.createChatBotMessage(
-        '¿Te gustaría agendar una llamada de consulta gratuita para discutir tu proyecto?',
-        {
-          delay: 1500,
-          widget: 'scheduleOptions',
-        }
+        this.t('¿Te gustaría agendar una consulta gratuita?', 'Would you like to book a free consultation?'),
+        { delay: 2000, widget: 'nextStepOptions' }
       ),
     ];
-    messages.forEach(this.updateChatbotState);
+    msgs.forEach(this.updateChatbotState);
   };
 
   handleProcess = () => {
-    const messages = [
-      this.createChatBotMessage('🔄 Nuestro proceso de trabajo:', { delay: 500 }),
+    const msgs = [
+      this.createChatBotMessage(this.t('🔄 Nuestro proceso de trabajo:', '🔄 Our work process:'), { delay: 500 }),
       this.createChatBotMessage(
-        '1. 📋 Análisis y Planificación\n' +
-        '   • Reunión inicial\n' +
-        '   • Definición de requisitos\n' +
-        '   • Propuesta técnica\n\n' +
-        '2. 🎨 Diseño\n' +
-        '   • Wireframes\n' +
-        '   • Prototipos\n' +
-        '   • Aprobación del cliente\n\n' +
-        '3. 💻 Desarrollo\n' +
-        '   • Desarrollo iterativo\n' +
-        '   • Revisiones periódicas\n' +
-        '   • Control de calidad\n\n' +
-        '4. 🚀 Implementación\n' +
-        '   • Pruebas finales\n' +
-        '   • Despliegue\n' +
-        '   • Capacitación\n\n' +
-        '5. 🛠️ Soporte\n' +
-        '   • Mantenimiento\n' +
-        '   • Actualizaciones\n' +
-        '   • Soporte técnico',
+        this.t(
+          '1. 📋 Análisis y Planificación\n   • Reunión inicial\n   • Definición de requisitos\n\n2. 🎨 Diseño\n   • Wireframes y prototipos\n\n3. 💻 Desarrollo\n   • Iterativo con revisiones\n\n4. 🚀 Entrega\n   • Pruebas + despliegue\n\n5. 🛠️ Soporte\n   • Mantenimiento continuo',
+          '1. 📋 Analysis & Planning\n   • Kickoff meeting\n   • Requirements definition\n\n2. 🎨 Design\n   • Wireframes & prototypes\n\n3. 💻 Development\n   • Iterative with reviews\n\n4. 🚀 Delivery\n   • Testing + deployment\n\n5. 🛠️ Support\n   • Ongoing maintenance'
+        ),
         { delay: 1000 }
       ),
-      this.createChatBotMessage('¿Te gustaría comenzar un proyecto con nosotros?', {
-        delay: 1500,
-        widget: 'startProjectOptions',
-      }),
+      this.createChatBotMessage(
+        this.t('¿Te gustaría comenzar un proyecto?', 'Would you like to start a project?'),
+        { delay: 1500, widget: 'startProjectOptions' }
+      ),
     ];
-    messages.forEach(this.updateChatbotState);
+    msgs.forEach(this.updateChatbotState);
   };
 
   handleCall = () => {
-    const messages = [
+    const msgs = [
       this.createChatBotMessage(
-        '📞 ¡Excelente! Podemos agendar una llamada de consulta gratuita.',
+        this.t('📞 ¡Excelente! Primera consulta totalmente gratuita.', '📞 Great! First consultation is completely free.'),
         { delay: 500 }
       ),
       this.createChatBotMessage(
-        'Por favor, selecciona el horario que prefieras:',
-        {
-          delay: 1000,
-          widget: 'scheduleOptions',
-        }
+        this.t('Selecciona el horario que prefieras:', 'Select your preferred time slot:'),
+        { delay: 1000, widget: 'scheduleOptions' }
       ),
     ];
-    messages.forEach(this.updateChatbotState);
+    msgs.forEach(this.updateChatbotState);
   };
 
   handleScheduleTime = (time) => {
-    const messages = [
+    const msgs = [
+      this.createChatBotMessage(`✅ ${this.t('Horario seleccionado', 'Selected time')}: ${time}`, { delay: 500 }),
       this.createChatBotMessage(
-        `✅ Has seleccionado: ${time}`,
-        { delay: 500 }
-      ),
-      this.createChatBotMessage(
-        'Para confirmar la llamada, necesito algunos datos:',
-        {
-          delay: 1000,
-          widget: 'contactForm',
-          props: {
-            selectedTime: time
-          }
-        }
+        this.t('Para confirmar, necesito algunos datos:', 'To confirm, I need a few details:'),
+        { delay: 1000, widget: 'contactForm', props: { selectedTime: time } }
       ),
     ];
-    messages.forEach(this.updateChatbotState);
+    msgs.forEach(this.updateChatbotState);
   };
 
   handleContactSubmit = (data) => {
-    // Preparar el template para EmailJS
     const templateParams = {
-      nombre: data.name,
-      email: data.email,
-      telefono: data.phone,
-      horario: data.selectedTime || 'No especificado',
-      tipo: 'Solicitud de Llamada desde Chatbot',
-      asunto: 'Nueva Solicitud de Llamada',
-      mensaje: `Solicitud de llamada:\n
-        Nombre: ${data.name}\n
-        Email: ${data.email}\n
-        Teléfono: ${data.phone}\n
-        Horario preferido: ${data.selectedTime || 'No especificado'}`
+      nombre: data.name, email: data.email, telefono: data.phone,
+      horario: data.selectedTime || 'N/A',
+      tipo: 'Chatbot Call Request',
+      asunto: 'New Call Request via Chatbot',
+      mensaje: `Call request:\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nTime: ${data.selectedTime || 'N/A'}`,
     };
 
-    // Enviar email usando EmailJS
-    emailjs.send(
-      'service_l7c1624',
-      'template_183qklm',
-      templateParams,
-      '0p1HNeMwdEFpSp3LN'
-    )
-    .then((result) => {
-      console.log('Email enviado exitosamente:', result.text);
-      const messages = [
-        this.createChatBotMessage(
-          '✅ ¡Perfecto! He registrado tus datos:',
+    emailjs.send('service_l7c1624', 'template_183qklm', templateParams, '0p1HNeMwdEFpSp3LN')
+      .then(() => {
+        const msgs = [
+          this.createChatBotMessage(
+            this.t('✅ ¡Perfecto! Hemos registrado tu solicitud.', '✅ Perfect! We have registered your request.'),
+            { delay: 500 }
+          ),
+          this.createChatBotMessage(
+            this.t('Pronto nos pondremos en contacto contigo. ¿Algo más?', "We'll be in touch soon. Anything else?"),
+            { delay: 1000, widget: 'mainOptions' }
+          ),
+        ];
+        msgs.forEach(this.updateChatbotState);
+      })
+      .catch(() => {
+        const msg = this.createChatBotMessage(
+          this.t(
+            '❌ Error al enviar. Contáctanos en contacto@desarrollosnerd.com',
+            '❌ Error sending. Contact us at contacto@desarrollosnerd.com'
+          ),
           { delay: 500 }
-        ),
-        this.createChatBotMessage(
-          `Nombre: ${data.name}\nEmail: ${data.email}\nTeléfono: ${data.phone}\nHorario: ${data.selectedTime || 'No especificado'}`,
-          { delay: 1000 }
-        ),
-        this.createChatBotMessage(
-          '📧 Te hemos enviado un correo de confirmación. Pronto nos pondremos en contacto contigo.',
-          { delay: 1500 }
-        ),
-        this.createChatBotMessage(
-          '¿Hay algo más en lo que pueda ayudarte?',
-          {
-            delay: 2000,
-            widget: 'mainOptions',
-          }
-        ),
-      ];
-      messages.forEach(this.updateChatbotState);
-    })
-    .catch((error) => {
-      console.error('Error al enviar el email:', error);
-      const errorMessages = [
-        this.createChatBotMessage(
-          '❌ Lo siento, ha ocurrido un error al procesar tu solicitud.',
-          { delay: 500 }
-        ),
-        this.createChatBotMessage(
-          'Por favor, intenta nuevamente o contáctanos directamente a rdemetrio72@yahoo.com',
-          { delay: 1000 }
-        ),
-      ];
-      errorMessages.forEach(this.updateChatbotState);
-    });
+        );
+        this.updateChatbotState(msg);
+      });
   };
 
   handleDefault = () => {
-    const message = this.createChatBotMessage(
-      'Disculpa, no entendí tu pregunta. ¿Podrías seleccionar una de estas opciones?',
-      {
-        widget: 'mainOptions',
-      }
+    const msg = this.createChatBotMessage(
+      this.t('Disculpa, no entendí. Selecciona una opción:', "Sorry, I didn't understand. Please select an option:"),
+      { widget: 'mainOptions' }
     );
-    this.updateChatbotState(message);
+    this.updateChatbotState(msg);
   };
 
   updateChatbotState = (message) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      messages: [...prevState.messages, message],
-    }));
+    this.setState(prev => ({ ...prev, messages: [...prev.messages, message] }));
   };
 }
 
-export default ActionProvider; 
+export default ActionProvider;

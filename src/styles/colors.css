@@ -1,20 +1,68 @@
-/* src/styles/colors.css */
-
 :root {
-    /* Azules Tecnológicos */
-    --color-primary: #007bff;   /* Azul principal, para botones, acentos */
-    --color-primary-dark: #0056b3; /* Azul más oscuro para hover/active */
-    --color-secondary: #6c757d;  /* Gris secundario, para texto menos prominente */
-  
-    /* Verdes Brillantes / Neón */
-    --color-accent-green: #28a745; /* Verde brillante para elementos destacados */
-    --color-accent-green-dark: #218838; /* Verde más oscuro para hover/active */
-  
-    /* Grises Neutros */
-    --color-background-light: #f8f9fa; /* Fondo claro */
-    --color-text-dark: #343a40;      /* Texto oscuro */
-    --color-border: #dee2e6;        /* Bordes sutiles */
-  
-    /* Acento geek/futurista */
-    --color-geek-accent: #00bcd4; /* Un cian brillante para toques especiales, como brillos de código */
-  }
+  /* === BACKGROUNDS === */
+  --bg-0: #07070e;
+  --bg-1: #0d0d1c;
+  --bg-2: #131326;
+  --bg-3: #1a1a32;
+  --bg-4: #22223e;
+
+  /* === PRIMARY — Violet === */
+  --primary: #8b5cf6;
+  --primary-light: #a78bfa;
+  --primary-dark: #7c3aed;
+  --primary-glow: rgba(139, 92, 246, 0.3);
+  --primary-subtle: rgba(139, 92, 246, 0.08);
+
+  /* === ACCENT — Cyan === */
+  --accent: #06b6d4;
+  --accent-light: #22d3ee;
+  --accent-dark: #0891b2;
+  --accent-glow: rgba(6, 182, 212, 0.3);
+
+  /* === GREEN — Success/Code === */
+  --green: #10b981;
+  --green-light: #34d399;
+
+  /* === TEXT === */
+  --text-1: #f1f5f9;
+  --text-2: #cbd5e1;
+  --text-3: #94a3b8;
+  --text-4: #64748b;
+
+  /* === BORDERS === */
+  --border: rgba(139, 92, 246, 0.12);
+  --border-bright: rgba(139, 92, 246, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* === SHADOWS & GLOWS === */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border);
+  --shadow-glow: 0 0 40px var(--primary-glow);
+  --shadow-accent: 0 0 40px var(--accent-glow);
+
+  /* === GRADIENTS === */
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--accent));
+  --gradient-bg: linear-gradient(135deg, #0d0d1c 0%, #0a0a18 50%, #0d0d1c 100%);
+  --gradient-card: linear-gradient(135deg, var(--bg-2), var(--bg-3));
+  --gradient-text: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+
+  /* === RADIUS === */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* === TRANSITIONS === */
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Legacy aliases for components not yet updated */
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-accent-green: var(--green);
+  --color-accent-green-dark: var(--green);
+  --color-background-light: var(--bg-1);
+  --color-text-dark: var(--text-1);
+  --color-border: var(--border);
+  --color-secondary: var(--text-3);
+  --color-geek-accent: var(--accent);
+}
